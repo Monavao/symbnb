@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ title | upper }}</h1>
+
+    {% if age > 18 %}
+        <p>Vous êtes majeur</p>
+    {% else %}
+        <p>Vous êtes mineur</p>
+    {% endif %}
+
+    <ul>
+        {% for compteur in 0..10 %}
+            <li>{{ compteur }}</li>
+        {% endfor %}
+    </ul>
+
+    {% for prenom, age in prenoms %}
+        <p>(itération numéro {{ loop.index0 }}) : {{ prenom }} à {{ age }} ans</p>
+    {% endfor %}
+</body>
+</html>

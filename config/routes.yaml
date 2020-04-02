@@ -1,3 +1,15 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\HomeController::home
+
+hello:
+    path: /hello/{prenom}
+    controller: App\Controller\HomeController::hello
+    defaults:
+        prenom: ' à vous'
+    requirements:
+        prenom: .+
+
+#hello_bis:
+#    path: /hello
+#    controller: App\Controller\HomeController::hello
