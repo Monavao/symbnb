@@ -10,6 +10,6 @@ hello:
     requirements:
         prenom: .+
 
-#hello_bis:
-#    path: /hello
-#    controller: App\Controller\HomeController::hello
+hello_base:
+    path: /hello
+    controller: App\Controller\HomeController::hello

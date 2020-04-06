@@ -1,0 +1,12 @@
+.card {
+    z-index: 400;
+    box-shadow: -4px 4px 3px #eeeeee;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+}
+.card:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}

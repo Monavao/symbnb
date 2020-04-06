@@ -1,29 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{ title | upper }}</h1>
+{% extends 'base.html.twig' %}
 
-    {% if age > 18 %}
-        <p>Vous êtes majeur</p>
-    {% else %}
-        <p>Vous êtes mineur</p>
-    {% endif %}
+{% block body %}
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <h1 class="display-3 text-center">Bienvenue sur SymBnB !</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+        </div>
 
-    <ul>
-        {% for compteur in 0..10 %}
-            <li>{{ compteur }}</li>
-        {% endfor %}
-    </ul>
+        <h2 class="h1 text-center mt-5">Nos meilleures annonces</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card bg-white mb-3">
+                    <div class="card-header text-center">
+                        3 chambres, <strong>49€ / nuit</strong>
+                        <br>
+                        <small>Pas encore noté</small>
+                    </div>
 
-    {% for prenom, age in prenoms %}
-        <p>(itération numéro {{ loop.index0 }}) : {{ prenom }} à {{ age }} ans</p>
-    {% endfor %}
-</body>
-</html>
+                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
+
+                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
+                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
+                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-white mb-3">
+                    <div class="card-header text-center">
+                        3 chambres, <strong>49€ / nuit</strong>
+                        <br>
+                        <small>Pas encore noté</small>
+                    </div>
+
+                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
+
+                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
+                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
+                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-white mb-3">
+                    <div class="card-header text-center">
+                        3 chambres, <strong>49€ / nuit</strong>
+                        <br>
+                        <small>Pas encore noté</small>
+                    </div>
+
+                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
+
+                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
+                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
+                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="h1 text-center mt-5">Nos meilleurs membres</h2>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card border-secondary mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            John Doe
+                        </h4>
+                        <hr>
+                        <div class="card-text">
+                            <img src="http://placehold.it/64x64" alt="avatar" class="float-left mr-3">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, itaque.</p>
+                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-secondary mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            John Doe
+                        </h4>
+                        <hr>
+                        <div class="card-text">
+                            <img src="http://placehold.it/64x64" alt="avatar" class="float-left mr-3">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, itaque.</p>
+                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
