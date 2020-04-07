@@ -2,14 +2,13 @@ home:
     path: /
     controller: App\Controller\HomeController::home
 
-hello:
-    path: /hello/{prenom}
-    controller: App\Controller\HomeController::hello
-    defaults:
-        prenom: ' à vous'
-    requirements:
-        prenom: .+
+ads:
+    path: /ads
+    controller: App\Controller\AdController::index
 
-hello_base:
-    path: /hello
-    controller: App\Controller\HomeController::hello
+ads_show:
+    path: /ads/{slug}-{id}
+    controller: App\Controller\AdController::show
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'

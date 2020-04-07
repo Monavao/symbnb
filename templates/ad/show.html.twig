@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ ad.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="ad-title" style="background-image: url({{ ad.coverImage }})">
+        <div class="container">
+            <h1>{{ ad.title }}</h1>
+            <p>{{ ad.introduction }}</p>
+            <p class="h2">
+                <strong>{{ ad.rooms }} chambres </strong>pour {{ ad.price }}€ par nuit
+            </p>
+            <a href="#" class="btn btn-primary">Réserver</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-3">
+                {{ ad.content | raw }}
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="http://placehol.it/64x64" alt="Avatar de utilisateur">
+                    </div>
+                    <div class="col-8">
+                        <h3>John Doe</h3>
+                        <span class="badge badge-primary">3 annonces</span>
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae consectetur doloremque dolorum exercitationem facere nesciunt nulla placeat rem sapiente!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae consectetur doloremque dolorum exercitationem facere nesciunt nulla placeat rem sapiente!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae consectetur doloremque dolorum exercitationem facere nesciunt nulla placeat rem sapiente!</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
