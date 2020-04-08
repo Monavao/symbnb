@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
                ->setPrice(mt_rand(40, 500))
                ->setRooms(mt_rand(1, 6));
 
-            for ($j = 1; $j <= mt_rand(2, 5); $j++) {
+            for ($j = 1; $j <= mt_rand(4, 8); $j++) {
                 $image = new Image();
                 $image->setUrl('https://picsum.photos/640/480?image='.$j)
                       ->setCaption($faker->sentence())
