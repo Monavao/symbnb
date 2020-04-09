@@ -18,15 +18,15 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 30; $i++) {
             $ad = new Ad();
             $ad->setTitle($faker->sentence())
-               ->setCoverImage($faker->imageUrl(1000, 350))
+               ->setCoverImage('https://picsum.photos/1000/350?image='.$i)
                ->setIntroduction($faker->paragraph(2))
                ->setContent('<p>' . implode('<p></p>', $faker->paragraphs(5)) . '</p>')
                ->setPrice(mt_rand(40, 500))
                ->setRooms(mt_rand(1, 6));
 
-            for ($j = 1; $j <= mt_rand(2, 5); $j++) {
+            for ($j = 1; $j <= mt_rand(4, 8); $j++) {
                 $image = new Image();
-                $image->setUrl($faker->imageUrl())
+                $image->setUrl('https://picsum.photos/640/480?image='.$j)
                       ->setCaption($faker->sentence())
                       ->setAd($ad);
 
