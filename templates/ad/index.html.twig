@@ -7,6 +7,7 @@
         <h1 class="h1 text-center my-5">Les annonces de nos hôtes</h1>
         <div class="row">
             {% for ad in ads %}
+                {% set pathToAd = path('ads_show', {'slug': ad.slug, 'id': ad.id}) %}
                 <div class="col-md-4 d-flex align-items-stretch">
                     <div class="card bg-white mb-3">
                         <div class="card-header text-center">
@@ -15,14 +16,18 @@
                             <small>Pas encore noté</small>
                         </div>
 
-                        <img class="m-0" src="{{ ad.coverImage }}" style="height: 200px; width: 100%; display: block;">
+                        <a href="{{ pathToAd }}">
+                            <img class="m-0" src="{{ ad.coverImage }}" style="height: 200px; width: 100%; display: block;">
+                        </a>
 
                         <div class="card-body p-0 w-75 align-self-center align-text-bottom mt-2">
-                            <strong class="h6 card-title text-center m-2">{{ ad.title }}</strong>
+                            <a href="{{ pathToAd }}">
+                                <strong class="h6 card-title text-center m-2">{{ ad.title }}</strong>
+                            </a>
                             <p class="card-text align-text-bottom">{{ ad.introduction }}</p>
                         </div>
                         <div class="text-center my-2">
-                            <a href="#" class="btn btn-secondary">En savoir plus</a>
+                            <a href="{{ pathToAd }}" class="btn btn-secondary">En savoir plus</a>
                         </div>
                     </div>
                 </div>
