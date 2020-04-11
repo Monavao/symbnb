@@ -6,10 +6,15 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class Ad
 {
@@ -51,6 +56,13 @@ class Ad
     private $coverImage;
 
     /**
+     * @var FileFile
+     * @Assert\Image(mimeTypes="image/jpeg")
+     * @Vich\UploadableField(mapping="ads_image", fileNameProperty="coverImage")
+     */
+    private $coverFile;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $rooms;
@@ -60,9 +72,20 @@ class Ad
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->images     = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     /**
@@ -198,4 +221,54 @@ class Ad
 
         return $this;
     }
+
+    /**
+     * @return FileFile
+     */
+    public function getCoverFile(): ?FileFile
+    {
+        return $this->coverFile;
+    }
+
+    /**
+     * @param FileFile $coverFile
+     * @return Ad
+     * @throws \Exception
+     */
+    public function setCoverFile(FileFile $coverFile): Ad
+    {
+        $this->coverFile = $coverFile;
+
+        if ($this->coverFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+
 }

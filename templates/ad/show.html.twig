@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="ad-title" style="background-image: url({{ ad.coverImage }})">
+    <div class="ad-title" style="background-image:{% if ad.coverImage %}
+
+                    url({{ vich_uploader_asset(ad, 'coverFile')}})"
+{% else %}
+   {{ asset('/images/ads/empty.jpeg') }}"
+{% endif %}>
         <div class="container">
             <h1>{{ ad.title }}</h1>
             <p>{{ ad.introduction }}</p>
@@ -29,7 +34,15 @@
                     <div class="carousel-inner">
                         {% for image in ad.images %}
                         <div class="carousel-item {% if loop.first %}active{% endif %} }}">
-                            <img src="{{ image.url }}" class="d-block w-100" alt="{{ image.caption }}">
+{#                            <img src="{{ image.url }}" class="d-block w-100" alt="{{ image.caption }}">#}
+
+                            {% if image.url %}
+                                {# | imagine_filter('medium') #}
+                                <img src="{{ vich_uploader_asset(image, 'urlFile')}}" class="d-block w-100" alt="{{ image.caption }}">
+                            {% else %}
+                                <img src=" {{ asset('/images/ads/empty.jpeg') }}" class="d-block w-100" alt="default">
+                            {% endif %}
+
                             <div class="carousel-caption d-none d-md-block">
                                 <p>{{ image.caption }}</p>
                             </div>
