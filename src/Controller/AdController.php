@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdController extends AbstractController
@@ -55,8 +58,38 @@ class AdController extends AbstractController
             ], 301);
         }
 
-//        $ad = $this->repository->findOneBySlug($slug); // Ne sert plus car on a déjà la bonne entité!
+//        $ad = $this->repository->findOneBySlug($slug); // Ne sert plus car on a déjà la bonne entité! (Cf: ParamConverter)
 
         return $this->render('ad/show.html.twig', ['ad' => $ad]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function create(Request $request)
+    {
+        $ad   = new Ad();
+        $form = $this->createForm(AdType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->manager->persist($ad);
+            $this->manager->flush();
+
+            $this->addFlash(
+                'success', "Annonce <strong>{$ad->getTitle()}</strong> enregistrée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'id'   => $ad->getId(),
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/new.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

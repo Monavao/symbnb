@@ -6,6 +6,10 @@ ads:
     path: /ads
     controller: App\Controller\AdController::index
 
+ads_create:
+    path: /ads/new
+    controller: App\Controller\AdController::create
+
 ads_show:
     path: /ads/{slug}-{id}
     controller: App\Controller\AdController::show
