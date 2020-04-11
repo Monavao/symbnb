@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -37,7 +38,8 @@ class AdType extends AbstractType
                 ->add('introduction', TextType::class, $this->getConfig('Introduction', 'Donnez description globale de votre annonce'))
                 ->add('content', TextareaType::class, $this->getConfig('Détaillez votre annonce', 'Description détaillée'))
                 ->add('rooms', IntegerType::class, $this->getConfig('Nombre de chambre', 'Chambre(s) disponible(s)'))
-                ->add('price', MoneyType::class, $this->getConfig('Prix par nuit', 'Prix par nuit'));
+                ->add('price', MoneyType::class, $this->getConfig('Prix par nuit', 'Prix par nuit'))
+                ->add('images', CollectionType::class, ['entry_type' => ImageType::class, 'allow_add' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
