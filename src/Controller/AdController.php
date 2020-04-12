@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
-use App\Entity\Image;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,6 +94,41 @@ class AdController extends AbstractController
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Ad      $ad
+     * @return Response
+     */
+    public function edit(Request $request, Ad $ad)
+    {
+        $form = $this->createForm(AdType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($ad->getImages() as $image) {
+                $image->setAd($ad);
+                $this->manager->persist($image);
+            }
+
+            $this->manager->persist($ad);
+            $this->manager->flush();
+
+            $this->addFlash(
+                'success', "Annonce <strong>{$ad->getTitle()}</strong>Modifications enregistrée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'id'   => $ad->getId(),
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
