@@ -17,7 +17,11 @@
                         </div>
 
                         <a href="{{ pathToAd }}">
-                            <img class="m-0" src="{{ ad.coverImage }}" style="height: 200px; width: 100%; display: block;">
+                            {% if ad.coverImage %}
+                                <img src="{{ vich_uploader_asset(ad, 'coverFile')}}" class="m-0" style="height: 200px; width: 100%; display: block;" alt="cover image">
+                            {% else %}
+                                <img src=" {{ asset('/images/ads/empty.jpeg') }}" class="d-block w-100" alt="default">
+                            {% endif %}
                         </a>
 
                         <div class="card-body p-0 w-75 align-self-center align-text-bottom mt-2">
