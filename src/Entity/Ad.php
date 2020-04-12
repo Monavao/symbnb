@@ -57,7 +57,7 @@ class Ad
 
     /**
      * @var FileFile
-     * @Assert\Image(mimeTypes="image/jpeg")
+     * @Assert\Image(mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage="Seul les formats JPEG et PNG sont autorisés", maxSize="2M", maxSizeMessage="Taille max 2M")
      * @Vich\UploadableField(mapping="ads_image", fileNameProperty="coverImage")
      */
     private $coverFile;
