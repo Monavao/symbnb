@@ -16,3 +16,10 @@ ads_show:
     requirements:
         slug: '[a-z0-9\-]+'
         id: '\d+'
+
+ads_edit:
+    path: /ads/{slug}-{id}/edit
+    controller: App\Controller\AdController::edit
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'

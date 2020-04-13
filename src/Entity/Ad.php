@@ -6,6 +6,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,6 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
+ * @UniqueEntity("title", message="une autre annonce possède déjà ce titre")
  */
 class Ad
 {
@@ -27,11 +29,13 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="10", max="255", minMessage="Minimum 10 caratères", maxMessage="Maximum 255 caratères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255", maxMessage="Le slug doit faire au maximum 255 caratères")
      */
     private $slug;
 
@@ -42,11 +46,13 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min="10", max="255", minMessage="Minimum 10 caratères", maxMessage="Maximum 255 caratères")
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min="100", minMessage="Minimum 100 caratères")
      */
     private $content;
 
@@ -69,6 +75,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
@@ -172,7 +179,7 @@ class Ad
         return $this->coverImage;
     }
 
-    public function setCoverImage(string $coverImage): self
+    public function setCoverImage(?string $coverImage): self
     {
         $this->coverImage = $coverImage;
 
