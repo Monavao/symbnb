@@ -27,14 +27,15 @@ class Image
     private $url;
 
     /**
-     * @var FileFile
+     * @var FileFile|null
      * @Assert\Image(mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage="Seul les formats JPEG et PNG sont autorisés", maxSize="2M", maxSizeMessage="Taille max 2M")
      * @Vich\UploadableField(mapping="ads_image", fileNameProperty="url")
      */
     private $urlFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $caption;
 
@@ -69,7 +70,7 @@ class Image
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
 
@@ -81,7 +82,7 @@ class Image
         return $this->caption;
     }
 
-    public function setCaption(string $caption): self
+    public function setCaption(?string $caption): self
     {
         $this->caption = $caption;
 
