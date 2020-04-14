@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use App\Entity\Image;
-use Cocur\Slugify\Slugify;
+//use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AppFixtures extends Fixture
 {
@@ -18,7 +19,8 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 30; $i++) {
             $ad = new Ad();
             $ad->setTitle($faker->sentence())
-               ->setCoverImage('https://picsum.photos/1000/350?image='.$i)
+               ->setCoverFile(new File('public/images/ads/empty.jpeg'))
+               ->setCoverImage( "empty.jpeg")
                ->setIntroduction($faker->paragraph(2))
                ->setContent('<p>' . implode('<p></p>', $faker->paragraphs(5)) . '</p>')
                ->setPrice(mt_rand(40, 500))
@@ -26,7 +28,8 @@ class AppFixtures extends Fixture
 
             for ($j = 1; $j <= mt_rand(4, 8); $j++) {
                 $image = new Image();
-                $image->setUrl('https://picsum.photos/640/480?image='.$j)
+                $image->setUrlFile(new File('public/images/ads/empty.jpeg'))
+                      ->setUrl("empty.jpeg")
                       ->setCaption($faker->sentence())
                       ->setAd($ad);
 
