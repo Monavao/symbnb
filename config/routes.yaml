@@ -2,6 +2,14 @@ home:
     path: /
     controller: App\Controller\HomeController::home
 
+account_login:
+    path: /login
+    controller: App\Controller\AccountController:login
+
+account_logout:
+    path: /logout
+    controller: App\Controller\AccountController:logout
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index
