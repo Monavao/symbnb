@@ -10,6 +10,10 @@ account_logout:
     path: /logout
     controller: App\Controller\AccountController:logout
 
+account_register:
+    path: /register
+    controller: App\Controller\AccountController:register
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index

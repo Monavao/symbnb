@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
                  ->setEmail($faker->email)
                  ->setIntroduction($faker->sentence())
                  ->setDescription('<p>' . implode('<p></p>', $faker->paragraphs(3)) . '</p>')
-                 ->setPictureFile(new File('public/images/ads/empty-avatar.png'))
+                 ->setPictureFile(new File('public/images/users/empty-avatar.png'))
                  ->setPicture('empty-avatar.png')
                  ->setHash($hash);
 

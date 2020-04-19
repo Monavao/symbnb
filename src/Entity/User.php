@@ -6,6 +6,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,7 +15,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email", message="Cette adresse mail existe déjà")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class User implements UserInterface
 {
@@ -27,16 +30,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Prénom obligatoire")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Nom obligatoire")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Cette adresse mail n'est pas valide")
      */
     private $email;
 
@@ -58,12 +64,19 @@ class User implements UserInterface
     private $hash;
 
     /**
+     * @Assert\EqualTo(propertyPath="hash", message="Confirmation mot de passe incorrecte")
+     */
+    private $passwordConfirm;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10, max="255", minMessage="L'introduction doit faire au moins 10 caractères", maxMessage="L'introduction doit faire au maximum 255 caractères")
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=100, minMessage="La description doit faire au moins 100 caractères")
      */
     private $description;
 
@@ -279,11 +292,31 @@ class User implements UserInterface
     public function setPictureFile(?FileFile $pictureFile): User
     {
         $this->pictureFile = $pictureFile;
+        $now          = (new \DateTime())->format('Y-m-d H:i:s');
+        $creationDate = $this->getCreatedAt()->format('Y-m-d H:i:s');
 
-        if ($this->pictureFile instanceof UploadedFile) {
-            $this->updated_at = new \DateTime('now');
+        if ($this->pictureFile instanceof UploadedFile && $creationDate != $now) {
+            $this->updated_at = $now;
         }
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordConfirm()
+    {
+        return $this->passwordConfirm;
+    }
+
+    /**
+     * @param mixed $passwordConfirm
+     * @return User
+     */
+    public function setPasswordConfirm($passwordConfirm)
+    {
+        $this->passwordConfirm = $passwordConfirm;
         return $this;
     }
 
