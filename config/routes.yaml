@@ -14,6 +14,14 @@ account_register:
     path: /register
     controller: App\Controller\AccountController:register
 
+account_profile:
+    path: /account/profile
+    controller: App\Controller\AccountController:profile
+
+account_password:
+    path: /account/password-update
+    controller: App\Controller\AccountController:updatePassword
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index
