@@ -2,6 +2,26 @@ home:
     path: /
     controller: App\Controller\HomeController::home
 
+account_login:
+    path: /login
+    controller: App\Controller\AccountController:login
+
+account_logout:
+    path: /logout
+    controller: App\Controller\AccountController:logout
+
+account_register:
+    path: /register
+    controller: App\Controller\AccountController:register
+
+account_profile:
+    path: /account/profile
+    controller: App\Controller\AccountController:profile
+
+account_password:
+    path: /account/password-update
+    controller: App\Controller\AccountController:updatePassword
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index

@@ -2,7 +2,7 @@
     <p>Ajouter des images supplémentaires</p>
     {{ form_widget(form) }}
 
-    <input type="hidden" id="widgets-counter" value="0">
+{#    <input type="hidden" id="widgets-counter" value="0">#}
 
     <div class="form-group">
         <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
@@ -18,12 +18,19 @@
         <div class="row gallery-element">
             <div class="col-10">
                 <div class="row">
-                    <div class="col">
-                        {{ form_widget(form.urlFile) }}
-                        {#{{ form.url.vars.value }}#}
-                    </div>
-                    <div class="col">
+                    <div class="col-8">
                         {{ form_widget(form.caption) }}
+                    </div>
+                    <div class="col-4">
+                        {{ form_widget(form.urlFile) }}
+
+{#                        {{ dump(form) }}#}
+
+{#                        {% if form.vars.data.imageFilename %}#}
+{#                            <img src="{{ asset(articleForm.vars.data.imagePath) }}" height="100">#}
+{#                        {% endif %}#}
+
+                        {#{{ form.url.vars.value }}#}
                     </div>
                 </div>
             </div>

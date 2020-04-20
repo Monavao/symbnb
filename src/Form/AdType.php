@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Ad;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -13,24 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdType extends AbstractType
+class AdType extends ApplicationType
 {
-    /**
-     * @param string $label
-     * @param string $placeholder
-     * @param array  $options
-     * @return array
-     */
-    private function getConfig(string $label = '', string $placeholder = '', array $options = []): array
-    {
-        return array_merge([
-            'label' => $label,
-            'attr'  => [
-                'placeholder' => $placeholder
-            ]
-        ], $options);
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class, $this->getConfig('Titre', "Entrez votre titre"))
