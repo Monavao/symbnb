@@ -41,7 +41,6 @@ class AdController extends AbstractController
         ]);
     }
 
-
     /**
      * @param Ad     $ad
      * @param string $slug
@@ -78,6 +77,8 @@ class AdController extends AbstractController
                 $image->setAd($ad);
                 $this->manager->persist($image);
             }
+
+            $ad->setAuthor($this->getUser());
 
             $this->manager->persist($ad);
             $this->manager->flush();

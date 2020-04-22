@@ -130,4 +130,11 @@ class AccountController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    public function myAccount(): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'user' => $this->getUser()
+        ]);
+    }
 }

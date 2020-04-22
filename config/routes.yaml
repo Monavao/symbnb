@@ -2,6 +2,12 @@ home:
     path: /
     controller: App\Controller\HomeController::home
 
+user_show:
+    path: /user/{slug}
+    controller: App\Controller\UserController::index
+    requirements:
+        slug: '[a-z0-9\-]+'
+
 account_login:
     path: /login
     controller: App\Controller\AccountController:login
@@ -9,6 +15,10 @@ account_login:
 account_logout:
     path: /logout
     controller: App\Controller\AccountController:logout
+
+account_account:
+    path: /account
+    controller: App\Controller\AccountController:myAccount
 
 account_register:
     path: /register
