@@ -16,6 +16,10 @@ account_logout:
     path: /logout
     controller: App\Controller\AccountController:logout
 
+account_account:
+    path: /account
+    controller: App\Controller\AccountController:myAccount
+
 account_register:
     path: /register
     controller: App\Controller\AccountController:register
