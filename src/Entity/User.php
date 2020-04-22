@@ -106,6 +106,11 @@ class User implements UserInterface
         $this->created_at = new \DateTime();
     }
 
+    public function getFullName(): string
+    {
+        return "{$this->firstName} {$this->lastName}";
+    }
+
     /**
      * Permet d'initialiser le slug
      *

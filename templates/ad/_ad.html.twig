@@ -1,0 +1,28 @@
+{% set pathToAd = path('ads_show', {'slug': ad.slug, 'id': ad.id}) %}
+<div class="col-md-4 d-flex align-items-stretch">
+    <div class="card bg-white mb-3 w-100">
+        <div class="card-header text-center">
+            {{ ad.rooms }} chambres, <strong>{{ ad.price }}€ / nuit</strong>
+            <br>
+            <small>Pas encore noté</small>
+        </div>
+
+        <a href="{{ pathToAd }}">
+            {% if ad.coverImage %}
+                <img src="{{ vich_uploader_asset(ad, 'coverFile')}}" class="m-0" style="height: 200px; width: 100%; display: block;" alt="cover image">
+            {% else %}
+                <img src=" {{ asset('/images/ads/empty.jpeg') }}" class="d-block w-100" alt="default">
+            {% endif %}
+        </a>
+
+        <div class="card-body p-0 w-75 align-self-center align-text-bottom mt-2">
+            <a href="{{ pathToAd }}">
+                <strong class="h6 card-title text-center m-2">{{ ad.title }}</strong>
+            </a>
+            <p class="card-text align-text-bottom">{{ ad.introduction }}</p>
+        </div>
+        <div class="text-center my-2">
+            <a href="{{ pathToAd }}" class="btn btn-secondary">En savoir plus</a>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,18 @@ div.ad-title h1, div.ad-title p {
     text-shadow: 3px 3px rgba(0,0,0,0.5);
 }
 
-div.card-body a {
+div.card-body a, .linkText {
     text-decoration: none;
     color: inherit;
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 64px;
+    max-height: 64px;
 }
