@@ -8,6 +8,7 @@ use App\Form\AccountType;
 use App\Form\PasswordUpdateType;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,6 +81,8 @@ class AccountController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
+     *
      * @param Request $request
      * @return Response
      */
@@ -103,6 +106,8 @@ class AccountController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
+     *
      * @param Request                      $request
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
@@ -131,6 +136,11 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     *
+     * @return Response
+     */
     public function myAccount(): Response
     {
         return $this->render('user/index.html.twig', [
