@@ -53,3 +53,10 @@ ads_edit:
     requirements:
         slug: '[a-z0-9\-]+'
         id: '\d+'
+
+ads_delete:
+    path: /ads/{slug}-{id}/delete
+    controller: App\Controller\AdController::delete
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'

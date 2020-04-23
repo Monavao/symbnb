@@ -11,7 +11,7 @@
             {% if ad.coverImage %}
                 <img src="{{ vich_uploader_asset(ad, 'coverFile')}}" class="m-0" style="height: 200px; width: 100%; display: block;" alt="cover image">
             {% else %}
-                <img src=" {{ asset('/images/ads/empty.jpeg') }}" class="d-block w-100" alt="default">
+                <img src=" {{ asset('/images/empty.jpeg') }}" class="d-block w-100" alt="default">
             {% endif %}
         </a>
 
@@ -23,6 +23,9 @@
         </div>
         <div class="text-center my-2">
             <a href="{{ pathToAd }}" class="btn btn-secondary">En savoir plus</a>
+            {% if app.user and app.user == ad.author %}
+                <a href="{{ path('ads_edit', {"id": ad.id, "slug": ad.slug }) }}" class="btn btn-info">Modifier</a>
+            {% endif %}
         </div>
     </div>
 </div>

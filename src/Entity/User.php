@@ -109,7 +109,7 @@ class User implements UserInterface
     {
         $this->ads        = new ArrayCollection();
         $this->created_at = new \DateTime();
-        $this->userRoles = new ArrayCollection();
+        $this->userRoles  = new ArrayCollection();
     }
 
     public function getFullName(): string
@@ -336,7 +336,13 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $roles = $this->userRoles->map(function ($role) {
+            return $role->getTitle();
+        })->toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
     }
 
     /**

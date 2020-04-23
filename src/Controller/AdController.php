@@ -6,6 +6,8 @@ use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +28,7 @@ class AdController extends AbstractController
     public function __construct(AdRepository $repository, EntityManagerInterface $manager)
     {
         $this->repository = $repository;
-        $this->manager    = $manager; //Plus pour ajout /suppression en base
+        $this->manager    = $manager; //Plus pour ajout/suppression en base
     }
 
     /**
@@ -62,6 +64,8 @@ class AdController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
+     *
      * @param Request $request
      * @return Response
      */
@@ -99,6 +103,8 @@ class AdController extends AbstractController
     }
 
     /**
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Vous n'êtes pas le propriétaire de cette annonce.")
+     *
      * @param Request $request
      * @param Ad      $ad
      * @return Response
@@ -130,6 +136,30 @@ class AdController extends AbstractController
 
         return $this->render('ad/edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
+     *
+     * @param Request $request
+     * @param Ad      $ad
+     * @return Response
+     */
+    public function delete(Request $request, Ad $ad): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $ad->getSlug(), $request->get('_token'))) {
+            $this->manager->remove($ad);
+            $this->manager->flush();
+
+            $this->addFlash(
+                'success', "Annonce <strong>{$ad->getTitle()}</strong> supprimée!");
+
+            return $this->redirectToRoute('ads');
+        }
+
+        return $this->render('ad/show.html.twig', [
+            'ad' => $ad
         ]);
     }
 }
