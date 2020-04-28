@@ -17,10 +17,10 @@
             <p class="h2">
                 <strong>{{ ad.rooms }} chambres </strong>pour {{ ad.price }}€ par nuit
             </p>
-            <a href="#" class="btn btn-primary">Réserver</a>
+            <a href="{{ path('booking_create', { "id": ad.id, "slug": ad.slug }) }}" class="btn btn-primary">Réserver</a>
             {% if app.user and app.user == ad.author %}
-                <a href="{{ path('ads_edit', {"id": ad.id, "slug": ad.slug }) }}" class="btn btn-info">Modifier</a>
-                <form method="post" action="{{ path('ads_delete', {"id": ad.id, "slug": ad.slug }) }}" style="display: inline-block;" onsubmit="return confirm(`Confirmez-vous la suppression de l'annonce {{ ad.title }} ?`)">
+                <a href="{{ path('ads_edit', { "id": ad.id, "slug": ad.slug }) }}" class="btn btn-info">Modifier</a>
+                <form method="post" action="{{ path('ads_delete', { "id": ad.id, "slug": ad.slug }) }}" style="display: inline-block;" onsubmit="return confirm(`Confirmez-vous la suppression de l'annonce {{ ad.title }} ?`)">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.slug) }}">
 {#                    <input type="hidden" name="_method" value="DELETE">#}
                     <button class="btn btn-danger">Supprimer</button>
