@@ -62,8 +62,14 @@ ads_delete:
         id: '\d+'
 
 booking_create:
-    path: /ads/{slug}-{id}/book
+    path: /booking/{id}/book
     controller: App\Controller\BookingController::book
     requirements:
         slug: '[a-z0-9\-]+'
+        id: '\d+'
+
+booking_show:
+    path: /booking/{id}
+    controller: App\Controller\BookingController::show
+    requirements:
         id: '\d+'

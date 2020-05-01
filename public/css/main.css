@@ -23,8 +23,8 @@ div.ad-title h1, div.ad-title p {
 }
 
 div.card-body a, .linkText {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none!important;
+    color: inherit!important;
 }
 
 .avatar {
