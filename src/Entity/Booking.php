@@ -33,12 +33,14 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface")
+     * @Assert\GreaterThan("today", message="La date d'arrivée doit être supérieure à la date d'aujourd'hui")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface")
+     * @Assert\GreaterThan(propertyPath="startDate", message="La date de départ doit être supérieure à la date d'arrivée")
      */
     private $endDate;
 
@@ -83,9 +85,6 @@ class Booking
     {
         $days             = $this->getDays();
         $notAvailableDays = $this->getAd()->getNotAvailableDays();
-
-//        dump($this->getAd());
-//        die;
 
         $formatDay = function($day) {
             return $day->format('Y-m-d');

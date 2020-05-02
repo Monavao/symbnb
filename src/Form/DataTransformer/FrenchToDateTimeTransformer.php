@@ -8,6 +8,10 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class FrenchToDateTimeTransformer implements DataTransformerInterface
 {
 
+    /**
+     * @param mixed $date
+     * @return mixed|string
+     */
     public function transform($date)
     {
         if (is_null($date)) {
@@ -17,6 +21,10 @@ class FrenchToDateTimeTransformer implements DataTransformerInterface
         return $date->format('d/m/Y');
     }
 
+    /**
+     * @param mixed $frenchDate
+     * @return \DateTime|false|mixed
+     */
     public function reverseTransform($frenchDate)
     {
         if (is_null($frenchDate)) {
