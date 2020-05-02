@@ -42,3 +42,7 @@ div.card-body a, .linkText {
     max-width: 50px;
     max-height: 50px;
 }
+
+.datepicker table td.disabled, .datepicker table tr td.disabled:hover {
+    color: red !important;
+}
