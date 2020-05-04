@@ -32,6 +32,10 @@ account_password:
     path: /account/password-update
     controller: App\Controller\AccountController:updatePassword
 
+account_booking_list:
+    path: /account/bookings-list
+    controller: App\Controller\AccountController::bookingsList
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index

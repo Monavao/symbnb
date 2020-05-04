@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos réservations{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="alert alert-info mt-5">
+            <h1>Mes réservations</h1>
+        </div>
+        {% for booking in app.user.bookings %}
+            {% set ad = booking.ad %}
+            <div class="row my-3">
+                <div class="col-4 align-items-stretch">
+                    <img class="img-fluid" src="{{ vich_uploader_asset(ad, 'coverFile') }}"
+                         alt="annonce-{{ ad.title }}">
+                </div>
+                <div class="col-8 align-items-stretch">
+                    <h2 class="h4">{{ ad.title }}</h2>
+                    <p>Réservation <strong>n°{{ booking.id }}</strong>
+                    Du {{ booking.startDate | date('d/m/Y') }} au {{ booking.endDate | date('d/m/Y') }}
+                    ({{ booking.amount }}€)
+                    </p>
+                    <div>
+                        <a href="{{ path('booking_show', {"id": booking.id}) }}" class="btn btn-info">Plus
+                            d'informations</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

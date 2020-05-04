@@ -147,4 +147,12 @@ class AccountController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
+
+    /**
+     * @return Response
+     */
+    public function bookingsList(): Response
+    {
+        return$this->render('booking/bookingList.html.twig', []);
+    }
 }
