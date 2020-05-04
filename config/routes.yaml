@@ -32,6 +32,10 @@ account_password:
     path: /account/password-update
     controller: App\Controller\AccountController:updatePassword
 
+account_booking_list:
+    path: /account/bookings-list
+    controller: App\Controller\AccountController::bookingsList
+
 ads:
     path: /ads
     controller: App\Controller\AdController::index
@@ -59,4 +63,17 @@ ads_delete:
     controller: App\Controller\AdController::delete
     requirements:
         slug: '[a-z0-9\-]+'
+        id: '\d+'
+
+booking_create:
+    path: /booking/{slug}-{id}/book
+    controller: App\Controller\BookingController::book
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'
+
+booking_show:
+    path: /booking/{id}
+    controller: App\Controller\BookingController::show
+    requirements:
         id: '\d+'

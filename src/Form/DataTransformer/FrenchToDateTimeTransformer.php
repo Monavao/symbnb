@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Form\DataTransformer;
+
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+
+class FrenchToDateTimeTransformer implements DataTransformerInterface
+{
+
+    /**
+     * @param mixed $date
+     * @return mixed|string
+     */
+    public function transform($date)
+    {
+        if (is_null($date)) {
+            return '';
+        }
+
+        return $date->format('d/m/Y');
+    }
+
+    /**
+     * @param mixed $frenchDate
+     * @return \DateTime|false|mixed
+     */
+    public function reverseTransform($frenchDate)
+    {
+        if (is_null($frenchDate)) {
+            throw new TransformationFailedException("Vous devez fournir une date");
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y', $frenchDate);
+
+        if ($date === false) {
+            throw new TransformationFailedException("Mauvais format de date");
+        }
+
+        return $date;
+    }
+}

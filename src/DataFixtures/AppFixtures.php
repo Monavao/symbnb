@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ad;
+use App\Entity\Booking;
 use App\Entity\Image;
 //use Cocur\Slugify\Slugify;
 use App\Entity\Role;
@@ -48,8 +49,7 @@ class AppFixtures extends Fixture
         $users = [];
         for ($i = 1; $i <= 10; $i++) {
             $user = new User();
-
-            $hash= $this->encoder->encodePassword($user, 'password');
+            $hash = $this->encoder->encodePassword($user, 'password');
 
             $user->setFirstName($faker->firstName)
                  ->setLastName($faker->lastName)
@@ -87,6 +87,26 @@ class AppFixtures extends Fixture
                       ->setAd($ad);
 
                 $manager->persist($image);
+            }
+
+            for ($j =1; $j < mt_rand(0, 10); $j++) {
+                $booking   = new Booking();
+                $createdAt = $faker->dateTimeBetween('-6 months');
+                $startDate = $faker->dateTimeBetween('-3 months');
+                $duration  = mt_rand(3, 10);
+                $endDate   = (clone $startDate)->modify("+$duration days");
+                $amount    = $ad->getPrice() * $duration;
+                $booker    = $users[array_rand($users)];
+
+                $booking->setBooker($booker)
+                        ->setAd($ad)
+                        ->setStartDate($startDate)
+                        ->setEndDate($endDate)
+                        ->setCreatedAt($createdAt)
+                        ->setComment($faker->paragraph(2))
+                        ->setAmount($amount);
+
+                $manager->persist($booking);
             }
 
             $manager->persist($ad);

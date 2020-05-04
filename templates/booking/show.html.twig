@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation n°{{ booking.id }}{% endblock %}
+
+{% block body %}
+    {% set ad = booking.ad %}
+    {% set author = ad.author %}
+
+    <div class="container">
+        <h1 class="text-center mt-4 mb-5">Votre réservation {{ booking.id }}</h1>
+
+        {% if app.request.query.get('withAlert') %}
+            <div class="alert alert-success">
+               <p>Votre réservation auprès de {{ author.fullName }} pour l'annonce {{ ad.title }} à bien été prise en compte</p>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-6 d-flex align-items-stretch">
+                <div class="alert alert-light">
+                    <h2 class="text-center mb-4">Détails</h2>
+                    <dl class="row">
+                        <dt class="col-md-4">Numéro</dt>
+                        <dd class="col-md-8">{{ booking.id }}</dd>
+                        <dt class="col-md-4">Date d'arrivée</dt>
+                        <dd class="col-md-8">{{ booking.startDate | date('d-m-Y') }}</dd>
+                        <dt class="col-md-4">Date de départ</dt>
+                        <dd class="col-md-8">{{ booking.endDate | date('d-m-Y') }}</dd>
+                        <dt class="col-md-4">Nombre de nuits</dt>
+                        <dd class="col-md-8">{{ booking.duration }}</dd>
+                        <dt class="col-md-4">Montant total</dt>
+                        <dd class="col-md-8">{{ booking.amount }}€</dd>
+                        <dt class="col-md-4">Commentaire</dt>
+                        <dd class="col-md-8">{{ booking.comment }}</dd>
+                    </dl>
+                    <hr>
+                    <h2 class="alert-heading text-center mb-4">Votre hôte</h2>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <img class="avatar avatar-medium" src="{{ vich_uploader_asset(author, 'pictureFile') }}" alt="avatar-{{ author.fullName }}">
+                        </div>
+                        <div class="col-9">
+                            <h3>
+                                <a href="{{ path('user_show', { "slug": author.slug }) }}" class="linkText">{{ author.fullname }}</a>
+                            </h3>
+                            <span class="badge badge-primary">{{ author.ads | length }} annonce(s)</span>
+                        </div>
+                    </div>
+                    {{ author.description | raw }}
+                    <div class="text-center mb-2">
+                        <a href="{{ path('user_show', { "slug": author.slug }) }}" class="linkText btn btn-primary">Plus d'infos sur {{ author.firstname }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex align-items-stretch">
+                <div class="alert alert-light">
+                    <h2 class="alert-heading text-center mb-4">Votre hébergement</h2>
+                    <h4>
+                        <a href="{{ path('ads_show', { "slug": ad.slug, "id": ad.id }) }}" class="linkText">{{ ad.title }}</a>
+                    </h4>
+                    <img src="{{ vich_uploader_asset(ad, 'coverFile') }}" alt="{{ ad.title }}" class="img-fluid mb-3 mt-3">
+
+                    {{ ad.content | raw }}
+
+                    <div class="text-center mb-2">
+                        <a href="{{ path('ads_show', { "slug": ad.slug, "id": ad.id }) }}" class="btn btn-primary linkText">Plus d'informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
