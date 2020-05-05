@@ -26,8 +26,7 @@ class BookingType extends ApplicationType
         $builder
             ->add('startDate', TextType::class, $this->getConfig('Date d\'arrivée', ''))
             ->add('endDate', TextType::class, $this->getConfig('Date de départ',''))
-            ->add('comment', TextareaType::class, $this->getConfig('Commentaire', '', ['required' => false]))
-        ;
+            ->add('comment', TextareaType::class, $this->getConfig('Commentaire', '', ['required' => false]));
 
         $builder->get('startDate')->addModelTransformer($this->frenchTransformer);
         $builder->get('endDate')->addModelTransformer($this->frenchTransformer);

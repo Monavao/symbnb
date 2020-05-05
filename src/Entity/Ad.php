@@ -110,7 +110,7 @@ class Ad
         $this->images     = new ArrayCollection();
         $this->created_at = new \DateTime();
         $this->bookings   = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->comments   = new ArrayCollection();
     }
 
     /**
@@ -133,6 +133,15 @@ class Ad
     public function preUpdate()
     {
         $this->updated_at = new \DateTime();
+    }
+
+    public function getAvgRatings()
+    {
+        $sumOfRatings = array_reduce($this->comments->toArray(), function ($total, $comment) {
+            return $total + $comment->getRating();
+        }, 0);
+
+        return $sumOfRatings > 0 ? ($sumOfRatings / count($this->comments)) : 0;
     }
 
     /**
