@@ -135,6 +135,9 @@ class Ad
         $this->updated_at = new \DateTime();
     }
 
+    /**
+     * @return float|int
+     */
     public function getAvgRatings()
     {
         $sumOfRatings = array_reduce($this->comments->toArray(), function ($total, $comment) {
@@ -142,6 +145,21 @@ class Ad
         }, 0);
 
         return $sumOfRatings > 0 ? ($sumOfRatings / count($this->comments)) : 0;
+    }
+
+    /**
+     * @param User $author
+     * @return mixed|null
+     */
+    public function getCommentFromAuthor(User $author)
+    {
+        foreach ($this->comments as $comment) {
+            if ($comment->getAuthor() === $author) {
+                return $comment;
+            }
+        }
+
+        return null;
     }
 
     /**
