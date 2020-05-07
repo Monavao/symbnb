@@ -79,6 +79,14 @@ class Booking
     }
 
     /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
      * @return bool
      */
     public function isBookableDates(): bool

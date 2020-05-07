@@ -23,8 +23,7 @@ class RegistrationType extends ApplicationType
             ->add('hash', PasswordType::class, $this->getConfig('Mot de passe', 'Mot de passe'))
             ->add('passwordConfirm', PasswordType::class, $this->getConfig('Confirmation mot de passe', 'confirmez le mot de passe'))
             ->add('introduction', TextType::class, $this->getConfig('Introduction'))
-            ->add('description', TextareaType::class, $this->getConfig('Description', 'Présentez-vous'))
-        ;
+            ->add('description', TextareaType::class, $this->getConfig('Description', 'Présentez-vous'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

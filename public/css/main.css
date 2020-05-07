@@ -46,3 +46,7 @@ div.card-body a, .linkText {
 .datepicker table td.disabled, .datepicker table tr td.disabled:hover {
     color: red !important;
 }
+
+span.rating i {
+    color: goldenrod;
+}

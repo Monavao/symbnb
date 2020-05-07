@@ -4,7 +4,11 @@
         <div class="card-header text-center">
             {{ ad.rooms }} chambres, <strong>{{ ad.price }}€ / nuit</strong>
             <br>
-            <small>Pas encore noté</small>
+            {% if ad.comments | length %}
+                {% include 'partials/rating.html.twig' with { 'rating': ad.avgRatings } %}
+            {% else %}
+                <small>Pas encore noté</small>
+            {% endif %}
         </div>
 
         <a href="{{ pathToAd }}">
