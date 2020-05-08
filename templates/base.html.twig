@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr" class="h-100">
     <head>
         <meta charset="UTF-8">
         <title>SymBnB - {% block title %}Accueil{% endblock %}</title>
@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
         {% include 'partials/header.html.twig' %}
 
         {% block body %}{% endblock %}

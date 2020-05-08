@@ -50,3 +50,7 @@ div.card-body a, .linkText {
 span.rating i {
     color: goldenrod;
 }
+
+.alert .btn {
+    color: white!important;
+}
