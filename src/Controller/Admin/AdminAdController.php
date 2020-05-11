@@ -3,9 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Repository\AdRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminAdController extends AbstractController

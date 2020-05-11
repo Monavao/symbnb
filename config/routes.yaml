@@ -81,3 +81,7 @@ booking_show:
 admin_ads:
     path: /admin/ads
     controller: App\Controller\Admin\AdminAdController::index
+
+admin_account_login:
+    path: /admin/login
+    controller: App\Controller\Admin\AdminAccountController::login
