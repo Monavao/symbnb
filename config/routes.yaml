@@ -77,3 +77,7 @@ booking_show:
     controller: App\Controller\BookingController::show
     requirements:
         id: '\d+'
+
+admin_ads:
+    path: /admin/ads
+    controller: App\Controller\Admin\AdminAdController::index
