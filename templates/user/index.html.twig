@@ -10,8 +10,8 @@
                 <br>
                 <span class="badge badge-primary">{{ user.ads | length }} annonces</span>
             </div>
-            <div class="col-9">
-                <h1>{{ user.fullName }}</h1>
+            <div class="col-9 mb-5">
+                <h1 class="my-5">{{ user.fullName }}</h1>
                 {% if user is same as(app.user) %}
                     <div class="mt-3">
                         <a href="{{ path('account_profile') }}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
@@ -20,11 +20,9 @@
                 {% endif %}
             </div>
         </div>
-        <br>
         {{ user.description | raw }}
-        <hr>
-        <br>
-        <h2 class="text-center">Les annonces de {{ user.fullName }}</h2>
+        <hr class="my-4">
+        <h2 class="text-center mb-5">Les annonces de {{ user.fullName }}</h2>
 
         {% if user.ads | length > 0 %}
             <div class="row mt-5">
@@ -33,7 +31,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning text-center">
                 <p><strong>{{ user.fullName }}</strong> n'a pas encore d'annonce sur le site</p>
             </div>
         {% endif %}
