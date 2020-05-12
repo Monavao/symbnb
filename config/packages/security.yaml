@@ -23,10 +23,11 @@ security:
                 login_path: admin_account_login
                 check_path: admin_account_login
                 csrf_token_generator: security.csrf.token_manager
+                default_target_path: admin_ads
 
             logout:
-                path: account_logout
-                target: account_login
+                path: admin_account_logout
+                target: admin_account_login
 
         main:
             anonymous: lazy

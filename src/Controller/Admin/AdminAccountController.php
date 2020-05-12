@@ -9,6 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AdminAccountController extends AbstractController
 {
     /**
+     * @param AuthenticationUtils $utils
      * @return Response
      */
     public function login(AuthenticationUtils $utils): Response
@@ -20,5 +21,13 @@ class AdminAccountController extends AbstractController
             'hasError' => $error !== null,
             'username' => $username
         ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function logout(): void
+    {
+
     }
 }

@@ -82,6 +82,17 @@ admin_ads:
     path: /admin/ads
     controller: App\Controller\Admin\AdminAdController::index
 
+admin_ads_edit:
+    path: /admin/ads/{slug}-{id}/edit
+    controller: App\Controller\Admin\AdminAdController::edit
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'
+
 admin_account_login:
     path: /admin/login
     controller: App\Controller\Admin\AdminAccountController::login
+
+admin_account_logout:
+    path: /admin/logout
+    controller: App\Controller\Admin\AdminAccountController::logout
