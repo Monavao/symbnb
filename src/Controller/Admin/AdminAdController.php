@@ -53,7 +53,6 @@ class AdminAdController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($ad);
             $this->manager->flush();
-
             $this->addFlash('success', "L'annonce <strong>{$ad->getId()}</strong> a bien été modifiée");
         }
 
@@ -61,5 +60,24 @@ class AdminAdController extends AbstractController
             'ad'   => $ad,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @param Ad      $ad
+     * @param Request $request
+     * @return Response
+     */
+    public function delete(Request $request, Ad $ad): Response
+    {
+        if (count($ad->getBookings()) > 0) {
+            $this->addFlash('warning', "Vous ne pouvez supprimer l'annonce <strong>{$ad->getTitle()}</strong> ! Il y a déjà réservations dessus");
+        } elseif ($this->isCsrfTokenValid('delete' . $ad->getSlug(), $request->get('_token'))) {
+            $this->manager->remove($ad);
+            $this->manager->flush();
+
+            $this->addFlash('success', "L'annonce <strong>{$ad->getTitle()}</strong> a bien été supprimée");
+        }
+
+        return $this->redirectToRoute('admin_ads');
     }
 }
