@@ -123,3 +123,15 @@ admin_comments_delete:
 admin_bookings:
     path: /admin/bookings
     controller: App\Controller\Admin\AdminBookingController::index
+
+admin_bookings_edit:
+    path: admin/bookings/{id}/edit
+    controller: App\Controller\Admin\AdminBookingController::edit
+    requirements:
+        id: '\d+'
+
+admin_bookings_delete:
+    path: /admin/bookings/{id}/delete
+    controller: App\Controller\Admin\AdminBookingController::delete
+    requirements:
+        id: '\d+'

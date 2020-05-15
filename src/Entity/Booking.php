@@ -33,7 +33,7 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface")
-     * @Assert\GreaterThan("today", message="La date d'arrivée doit être supérieure à la date d'aujourd'hui")
+     * @Assert\GreaterThan("today", message="La date d'arrivée doit être supérieure à la date d'aujourd'hui", groups={"Front"})
      */
     private $startDate;
 
@@ -66,6 +66,7 @@ class Booking
 
     /**
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      */
     public function prePersist()
     {
