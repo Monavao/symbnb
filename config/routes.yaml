@@ -77,3 +77,61 @@ booking_show:
     controller: App\Controller\BookingController::show
     requirements:
         id: '\d+'
+
+admin_account_login:
+    path: /admin/login
+    controller: App\Controller\Admin\AdminAccountController::login
+
+admin_account_logout:
+    path: /admin/logout
+    controller: App\Controller\Admin\AdminAccountController::logout
+
+admin_ads:
+    path: /admin/ads
+    controller: App\Controller\Admin\AdminAdController::index
+
+admin_ads_edit:
+    path: /admin/ads/{slug}-{id}/edit
+    controller: App\Controller\Admin\AdminAdController::edit
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'
+
+admin_ads_delete:
+    path: /admin/ads/{slug}-{id}/delete
+    controller: App\Controller\Admin\AdminAdController::delete
+    requirements:
+        slug: '[a-z0-9\-]+'
+        id: '\d+'
+
+admin_comments:
+    path: /admin/comments
+    controller: App\Controller\Admin\AdminCommentController::index
+
+admin_comments_edit:
+    path: /admin/comment/{id}/edit
+    controller: App\Controller\Admin\AdminCommentController::edit
+    requirements:
+        id: '\d+'
+
+admin_comments_delete:
+    path: /admin/comments/{id}/delete
+    controller: App\Controller\Admin\AdminCommentController::delete
+    requirements:
+        id: '\d+'
+
+admin_bookings:
+    path: /admin/bookings
+    controller: App\Controller\Admin\AdminBookingController::index
+
+admin_bookings_edit:
+    path: admin/bookings/{id}/edit
+    controller: App\Controller\Admin\AdminBookingController::edit
+    requirements:
+        id: '\d+'
+
+admin_bookings_delete:
+    path: /admin/bookings/{id}/delete
+    controller: App\Controller\Admin\AdminBookingController::delete
+    requirements:
+        id: '\d+'
