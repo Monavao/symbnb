@@ -87,8 +87,10 @@ admin_account_logout:
     controller: App\Controller\Admin\AdminAccountController::logout
 
 admin_ads:
-    path: /admin/ads
+    path: /admin/ads/{page?1}
     controller: App\Controller\Admin\AdminAdController::index
+    requirements:
+        page: '\d+'
 
 admin_ads_edit:
     path: /admin/ads/{slug}-{id}/edit

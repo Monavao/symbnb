@@ -28,11 +28,14 @@ class AdminAdController extends AbstractController
     }
 
     /**
+     * @param int $page
      * @return Response
      */
-    public function index(): Response
+    public function index(int $page = 1): Response
     {
-        $ads = $this->repository->findAll();
+        $limit = 10;
+        $start = ($page * $limit) - $limit;
+        $ads   = $this->repository->findBy([], [], $limit, $start);
 
         return $this->render('admin/ad/index.html.twig', [
             'ads' => $ads
