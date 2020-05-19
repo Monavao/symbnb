@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Comment;
 use App\Form\AdminCommentType;
 use App\Repository\CommentRepository;
+use App\Service\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,22 +21,28 @@ class AdminCommentController extends AbstractController
      * @var EntityManagerInterface
      */
     protected $manager;
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
 
-    public function __construct(CommentRepository $repository, EntityManagerInterface $manager)
+    public function __construct(CommentRepository $repository, EntityManagerInterface $manager, Pagination $pagination)
     {
         $this->repository = $repository;
         $this->manager    = $manager;
+        $this->pagination = $pagination;
     }
 
     /**
+     * @param int $page
      * @return Response
      */
-    public function index(): Response
+    public function index(int $page): Response
     {
-        $comments = $this->repository->findAll();
+        $this->pagination->setEntityClass(Comment::class)->setCurrentPage($page);
 
         return $this->render('admin/comment/index.html.twig', [
-            'comments' => $comments
+            'pagination' => $this->pagination
         ]);
     }
 

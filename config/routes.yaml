@@ -107,8 +107,10 @@ admin_ads_delete:
         id: '\d+'
 
 admin_comments:
-    path: /admin/comments
+    path: /admin/comments/{page?1}
     controller: App\Controller\Admin\AdminCommentController::index
+    requirements:
+        page: '\d+'
 
 admin_comments_edit:
     path: /admin/comment/{id}/edit
@@ -123,8 +125,10 @@ admin_comments_delete:
         id: '\d+'
 
 admin_bookings:
-    path: /admin/bookings
+    path: /admin/bookings/{page?1}
     controller: App\Controller\Admin\AdminBookingController::index
+    requirements:
+        page: '\d+'
 
 admin_bookings_edit:
     path: admin/bookings/{id}/edit
