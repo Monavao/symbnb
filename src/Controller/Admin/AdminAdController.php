@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,22 +21,28 @@ class AdminAdController extends AbstractController
      * @var EntityManagerInterface
      */
     protected $manager;
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
 
-    public function __construct(AdRepository $repository, EntityManagerInterface $manager)
+    public function __construct(AdRepository $repository, EntityManagerInterface $manager, Pagination $pagination)
     {
         $this->repository = $repository;
         $this->manager    = $manager;
+        $this->pagination = $pagination;
     }
 
     /**
+     * @param int $page
      * @return Response
      */
-    public function index(): Response
+    public function index(int $page): Response
     {
-        $ads = $this->repository->findAll();
+        $this->pagination->setEntityClass(Ad::class)->setCurrentPage($page);
 
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $ads
+            'pagination' => $this->pagination
         ]);
     }
 
@@ -70,7 +77,7 @@ class AdminAdController extends AbstractController
     public function delete(Request $request, Ad $ad): Response
     {
         if (count($ad->getBookings()) > 0) {
-            $this->addFlash('warning', "Vous ne pouvez supprimer l'annonce <strong>{$ad->getTitle()}</strong> ! Il y a déjà réservations dessus");
+            $this->addFlash('warning', "Vous ne pouvez supprimer l'annonce <strong>{$ad->getTitle()}</strong> ! Il y a déjà des réservations dessus");
         } elseif ($this->isCsrfTokenValid('delete' . $ad->getSlug(), $request->get('_token'))) {
             $this->manager->remove($ad);
             $this->manager->flush();
