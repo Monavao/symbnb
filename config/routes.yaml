@@ -86,6 +86,10 @@ admin_account_logout:
     path: /admin/logout
     controller: App\Controller\Admin\AdminAccountController::logout
 
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\Admin\AdminDashboardController::index
+
 admin_ads:
     path: /admin/ads/{page?1}
     controller: App\Controller\Admin\AdminAdController::index
