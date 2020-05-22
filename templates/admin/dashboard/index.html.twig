@@ -80,7 +80,7 @@
                         {% for ad in bestAds %}
                             <tr>
                                 <td>{{ ad.title }}</td>
-                                <td>{{ ad.firstName }}{{ ad.lastName }}</td>
+                                <td>{{ ad.firstName }} {{ ad.lastName }}</td>
                                 <td class="text-center">
                                     <span class="badge badge-dark">{{ ad.note | number_format(1, ",", " ") }}</span>
                                 </td>
@@ -106,7 +106,7 @@
                         {% for ad in worstAds %}
                             <tr>
                                 <td>{{ ad.title }}</td>
-                                <td>{{ ad.firstName }}{{ ad.lastName }}</td>
+                                <td>{{ ad.firstName }} {{ ad.lastName }}</td>
                                 <td class="text-center">
                                     <span class="badge badge-dark">{{ ad.note | number_format(1, ",", " ") }}</span>
                                 </td>

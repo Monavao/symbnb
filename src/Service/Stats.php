@@ -24,52 +24,23 @@ class Stats
      */
     public function getStats()
     {
-        $users    = $this->getUserCount();
-        $ads      = $this->getAdsCount();
-        $bookings = $this->getBookingsCount();
-        $comments = $this->getCommentsCount();
+        $users    = $this->getEntityCount('App\Entity\User');
+        $ads      = $this->getEntityCount('App\Entity\Ad');
+        $bookings = $this->getEntityCount('App\Entity\Booking');
+        $comments = $this->getEntityCount('App\Entity\Comment');
 
         return compact('users', 'ads', 'bookings', 'comments');
     }
 
     /**
+     * @param string $entity
      * @return int|mixed|string
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function getUserCount()
+    public function getEntityCount(string $entity)
     {
-        return $this->manager->createQuery('SELECT COUNT(u) FROM App\Entity\User u')->getSingleScalarResult();
-    }
-
-    /**
-     * @return int|mixed|string
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     */
-    public function getAdsCount()
-    {
-        return $this->manager->createQuery('SELECT COUNT(a) FROM App\Entity\Ad a')->getSingleScalarResult();
-    }
-
-    /**
-     * @return int|mixed|string
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     */
-    public function getBookingsCount()
-    {
-        return $this->manager->createQuery('SELECT COUNT(b) FROM App\Entity\Booking b')->getSingleScalarResult();
-    }
-
-    /**
-     * @return int|mixed|string
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     */
-    public function getCommentsCount()
-    {
-        return $this->manager->createQuery('SELECT COUNT(c) FROM App\Entity\Comment c')->getSingleScalarResult();
+        return $this->manager->createQuery("SELECT COUNT(c) FROM {$entity} c")->getSingleScalarResult();
     }
 
     /**

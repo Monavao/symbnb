@@ -14,97 +14,37 @@
 
         <h2 class="h1 text-center mt-5">Nos meilleures annonces</h2>
         <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card bg-white mb-3 w-100">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49€ / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
-
-                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
-                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
-                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-white mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49€ / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
-
-                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
-                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
-                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card bg-white mb-3">
-                    <div class="card-header text-center">
-                        3 chambres, <strong>49€ / nuit</strong>
-                        <br>
-                        <small>Pas encore noté</small>
-                    </div>
-
-                    <img class="m-0" src="http://placehold.it/1000x400" alt="appartement" style="height: 200px; width: 100%; display: block;">
-
-                    <div class="card-body  p-0 w-75 align-self-center align-text-bottom">
-                        <h4 class="card-title text-center m-2">Awesome flat!</h4>
-                        <p class="card-text align-text-bottom">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus nisi quam qui tempore. Aliquid aut libero magnam magni molestias sit.</p>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-secondary align-content-center mb-2">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% for data in ads %}
+                {% include 'ad/_ad.html.twig' with { "ad":  data.annonce } %}
+            {% endfor %}
         </div>
 
         <h2 class="h1 text-center mt-5">Nos meilleurs membres</h2>
         <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card border-secondary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            John Doe
-                        </h4>
-                        <hr>
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, itaque.</p>
-                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
+            {% for data in users %}
+                {% set user = data.user %}
+                <div class="col">
+                    <div class="card border-secondary mb-3">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                {{ user.fullName }}
+                            </h3>
+                            <hr>
+                            <div class="card-text">
+
+                                {% if user %}
+                                    <img src="{{ vich_uploader_asset(user, 'pictureFile')}}" class="float-left mr-3 w-25" alt="avatar">
+                                {% else %}
+                                    <img src=" {{ asset('/images/empty-avatar.png') }}" class="float-left mr-3 w-25" alt="default">
+                                {% endif %}
+
+                                <p>{{ user.introduction }}</p>
+                                <a href="{{ path('user_show', { "slug": user.slug }) }}" class="btn btn-success float-right">En savoir plus</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card border-secondary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            John Doe
-                        </h4>
-                        <hr>
-                        <div class="card-text">
-                            <img src="http://placehold.it/64x64" alt="avatar" class="float-left mr-3">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, itaque.</p>
-                            <a href="#" class="btn btn-success float-right">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
