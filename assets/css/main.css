@@ -1,3 +1,6 @@
+@import url('./bootstrap-4-4-1.min.css');
+@import url('./bootswatch.min.css');
+
 .card {
     z-index: 400;
     box-shadow: -4px 4px 3px #eeeeee;
