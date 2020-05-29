@@ -1,3 +1,6 @@
+@import url('./bootstrap-4-4-1.min.css');
+@import url('./bootswatch.min.css');
+
 .card {
     z-index: 400;
     box-shadow: -4px 4px 3px #eeeeee;
@@ -15,11 +18,11 @@ div.ad-title {
     padding: 2em;
     background-size: cover;
     background-position: center center;
-}
 
-div.ad-title h1, div.ad-title p {
-    color: white;
-    text-shadow: 3px 3px rgba(0,0,0,0.5);
+    h1, p {
+        color: white;
+        text-shadow: 3px 3px rgba(0,0,0,0.5);
+    }
 }
 
 div.card-body a, .linkText {
@@ -31,16 +34,16 @@ div.card-body a, .linkText {
     max-width: 100px;
     max-height: 100px;
     border-radius: 50%;
-}
 
-.avatar-medium {
-    max-width: 50px;
-    max-height: 50px;
-}
+    &.avatar-medium {
+        max-width: 50px;
+        max-height: 50px;
+    }
 
-.avatar-mini {
-    max-width: 50px;
-    max-height: 50px;
+    &.avatar-mini {
+        max-width: 50px;
+        max-height: 50px;
+    }
 }
 
 .datepicker table td.disabled, .datepicker table tr td.disabled:hover {
