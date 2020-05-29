@@ -24,7 +24,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
+    .addEntry('datepickerjs', './assets/js/datepicker.js')
+    .addEntry('ad', './assets/js/adScript.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -53,11 +54,11 @@ Encore
         config.corejs = 3;
     })
 
-    .addStyleEntry('css/main', './assets/css/main.css')
-    .addStyleEntry('css/datepicker', './assets/css/bootstrap-datepicker.min.css')
+    .addStyleEntry('main', './assets/css/main.scss')
+    .addStyleEntry('datepickercss', './assets/css/bootstrap-datepicker.min.css')
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -67,7 +68,12 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
