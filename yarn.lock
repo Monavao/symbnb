@@ -4467,6 +4467,11 @@ mode-sass@^1.0.0:
   resolved "https://registry.yarnpkg.com/mode-sass/-/mode-sass-1.0.0.tgz#bd17961811ce07cef952832ad71e9298e603ecc0"
   integrity sha512-8WyMSRWO6X1PWj8YrzmtsK4RBcbr1iuRWL/1kSqz0H7Nz4DPnNzq13agkjS8g8tif3PpKsy+3v0Ta2gsGQ6Hgw==
 
+moment@^2.27.0:
+  version "2.27.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"

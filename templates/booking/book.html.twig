@@ -14,7 +14,10 @@
         {{ form_start(form) }}
         <div class="alert alert-light">
             <h2 class="h4 my-5 text-center">Commencez par indiquer vos dates</h2>
-            <div class="row">
+            <div id="bookingJourney" class="row"
+                 data-booking-notavailabledays="{{ ad.notAvailableDays | map((elem) => elem | date('d/m/Y')) | json_encode }}"
+                 data-booking-price="{{ ad.price }}"
+            >
                 <div class="col">
                     {{ form_row(form.startDate) }}
                 </div>
@@ -38,37 +41,5 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('datepickerjs') }}
-    <script>
-        $(document).ready(function () {
-            const $startEndDate = $('#booking_startDate, #booking_endDate');
-
-            $startEndDate.datepicker({
-                format:        'dd/mm/yyyy',
-                datesDisabled: [
-                    {% for day in ad.notAvailableDays %}
-                    "{{ day.format('d/m/Y') }}",
-                    {% endfor %}
-                ],
-                startDate:     new Date(),
-            });
-
-            $startEndDate.on('change', calculateAmount);
-        });
-
-        function calculateAmount() {
-            const endDate   = new Date($('#booking_endDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
-            const startDate = new Date($('#booking_startDate').val().replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1'));
-
-            if (startDate && endDate && startDate < endDate) {
-                const DAY_TIME = (24 * 60 * 60 * 1000);
-
-                const interval = endDate.getTime() - startDate.getTime();
-                const days     = interval / DAY_TIME;
-                const amount   = days * {{ ad.price }};
-
-                $('#days').text(days);
-                $('#amount').text(amount.toLocaleString('fr-FR'));
-            }
-        }
-    </script>
+    {{ encore_entry_script_tags('booking') }}
 {% endblock %}

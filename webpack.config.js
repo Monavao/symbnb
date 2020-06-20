@@ -26,6 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('datepickerjs', './assets/js/datepicker.js')
     .addEntry('ad', './assets/js/adScript.js')
+    .addEntry('booking', './assets/js/booking.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
