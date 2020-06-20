@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-{#    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">#}
     {{ encore_entry_link_tags('datepickercss') }}
 {% endblock %}
 
@@ -38,11 +37,12 @@
 {% endblock %}
 
 {% block javascripts %}
-{#    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>#}
     {{ encore_entry_script_tags('datepickerjs') }}
     <script>
         $(document).ready(function () {
-            $('#booking_startDate, #booking_endDate').datepicker({
+            const $startEndDate = $('#booking_startDate, #booking_endDate');
+
+            $startEndDate.datepicker({
                 format:        'dd/mm/yyyy',
                 datesDisabled: [
                     {% for day in ad.notAvailableDays %}
@@ -52,7 +52,7 @@
                 startDate:     new Date(),
             });
 
-            $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
+            $startEndDate.on('change', calculateAmount);
         });
 
         function calculateAmount() {
