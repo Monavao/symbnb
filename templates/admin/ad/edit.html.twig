@@ -116,7 +116,7 @@
             {{ form_row(form.caption) }}
         </div>
         <div class="col-2">
-            <button type="button" class="btn btn-danger" data-action="delete" data-target="block_{{ id }}">
+            <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{ id }}">
                 <i class="fas fa-trash"></i>
             </button>
         </div>
@@ -124,12 +124,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        $(document).ready(function() {
-            $('[data-action="delete"]').on('click', function () {
-                const target = "#" + this.dataset.target;
-                $(target).remove();
-            });
-        });
-    </script>
+    {{ encore_entry_script_tags('ad') }}
 {% endblock %}

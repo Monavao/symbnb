@@ -1,9 +1,10 @@
 handleDeleteButtons();
 $('#add-image').click(function () {
-    const index = +$('.gallery-element').length;
-    const tmp   = $('#ad_images').data('prototype').replace(/__name__/g, index);
+    const $adImages = $('#ad_images');
+    const index     = +$('.gallery-element').length;
+    const tmp       = $adImages.data('prototype').replace(/__name__/g, index);
 
-    $('#ad_images').append(tmp);
+    $adImages.append(tmp);
 
     handleDeleteButtons();
 });
@@ -11,7 +12,6 @@ $('#add-image').click(function () {
 function handleDeleteButtons() {
     $('button[data-action="delete"]').click(function () {
         const target = this.dataset.target;
-
         $(target).remove();
     });
 }
