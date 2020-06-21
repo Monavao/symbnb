@@ -37,8 +37,10 @@ account_booking_list:
     controller: App\Controller\AccountController::bookingsList
 
 ads:
-    path: /ads
+    path: /ads/{page?1}
     controller: App\Controller\AdController::index
+    requirements:
+        page: '\d+'
 
 ads_create:
     path: /ads/new

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\Booking;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -25,21 +27,28 @@ class AdController extends AbstractController
      */
     protected $manager;
 
-    public function __construct(AdRepository $repository, EntityManagerInterface $manager)
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
+
+    public function __construct(AdRepository $repository, EntityManagerInterface $manager, Pagination $pagination)
     {
         $this->repository = $repository;
         $this->manager    = $manager; //Plus pour ajout/suppression en base
+        $this->pagination = $pagination;
     }
 
     /**
+     * @param $page
      * @return Response
      */
-    public function index()
+    public function index(int $page)
     {
-        $ads = $this->repository->findAll();
+        $this->pagination->setEntityClass(Ad::class)->setCurrentPage($page)->setLimit(12);
 
         return $this->render('ad/index.html.twig', [
-            'ads' => $ads
+            'pagination' => $this->pagination
         ]);
     }
 
