@@ -19,7 +19,7 @@ class BookingController extends AbstractController
     /**
      * @var EntityManagerInterface
      */
-    protected $manager;
+    protected EntityManagerInterface $manager;
 
     public function __construct(EntityManagerInterface $manager)
     {
